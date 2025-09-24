@@ -23,6 +23,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 import static bt.TestUtil.assertExceptionWithMessage;
 import static org.junit.Assert.assertArrayEquals;
@@ -53,10 +54,12 @@ public class MagnetUriParserTest {
         assertTrue(trackerUrls.contains(trackerUrl2));
 
         Collection<InetPeerAddress> peerAddresses = uri.getPeerAddresses();
+        Set<InetPeerAddress> expectedPeers = Set.of(
+            new InetPeerAddress("1.1.1.1", 10000),
+            new InetPeerAddress("2.2.2.2", 10000)
+        );
         assertEquals(2, peerAddresses.size());
-        Iterator<InetPeerAddress> iter = peerAddresses.iterator();
-        assertEquals(new InetPeerAddress("1.1.1.1", 10000), iter.next());
-        assertEquals(new InetPeerAddress("2.2.2.2", 10000), iter.next());
+        assertEquals(expectedPeers, peerAddresses);
     }
 
     @Test

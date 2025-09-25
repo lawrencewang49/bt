@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -54,11 +55,11 @@ public class MagnetUriParserTest {
         assertTrue(trackerUrls.contains(trackerUrl2));
 
         Collection<InetPeerAddress> peerAddresses = uri.getPeerAddresses();
-        Collection<InetPeerAddress> expectedPeers = Set.of(
+        Set<InetPeerAddress> expectedPeers = new HashSet<>(Arrays.asList(
             new InetPeerAddress("1.1.1.1", 10000),
             new InetPeerAddress("2.2.2.2", 10000)
-        );
-        assertEquals(expectedPeers, peerAddresses);
+        ));
+        assertEquals(new HashSet<>(expectedPeers), peerAddresses);
     }
 
     @Test
